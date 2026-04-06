@@ -1,13 +1,13 @@
 POST /api/auth/register/
 {
-  "username": "deepanshi",
-  "email": "test@gmail.com",
-  "password": "123456",
+  "username": "demo_customer",
+  "email": "customer@example.com",
+  "password": "your-password",
   "role": "customer"
 }
 
 POST /api/auth/login/
 {
-  "username": "deepanshi",
-  "password": "123456"
+  "username": "demo_customer",
+  "password": "your-password"
 }

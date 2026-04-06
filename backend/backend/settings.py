@@ -22,6 +22,20 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+def env_bool(name, default=False):
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+def env_list(name, default=""):
+    value = os.getenv(name, default)
+    if not value:
+        return []
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -40,9 +54,9 @@ SIMPLE_JWT = {
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env_bool("DEBUG", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env_list("ALLOWED_HOSTS", "127.0.0.1,localhost")
 
 
 # Application definition
@@ -74,7 +88,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = env_bool("CORS_ALLOW_ALL_ORIGINS", True)
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -108,19 +122,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'service_db',
-#         'USER': 'root',
-#         'PASSWORD': 'Deepanshi',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#             'charset': 'utf8mb4',
-#         }
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

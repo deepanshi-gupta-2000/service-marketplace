@@ -7,4 +7,5 @@ class User(AbstractUser):
         ('customer', 'Customer'),
         ('professional', 'Professional'),
     )
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    email = models.EmailField(unique=True)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='customer')

@@ -1,5 +1,3 @@
-
-
 # Register your models here.
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
@@ -10,18 +8,19 @@ from .models import User
 class CustomUserAdmin(UserAdmin):
     model = User
 
-    list_display = ('id', 'username', 'email')
+    list_display = ('id', 'username', 'email', 'role')
+    # list_filter = ('role')
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal Info', {'fields': ('email',)}),
+        ('Personal Info', {'fields': ('email', 'role')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password1', 'password2'),
+            'fields': ('username', 'email', 'password1', 'password2', 'role'),
         }),
     )
 

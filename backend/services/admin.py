@@ -1,8 +1,8 @@
-
-
-# Register your models here.
 from django.contrib import admin
-from .models import Service, ServiceProvider
+
+from .models import ProviderProfile, Service, ServiceProvider
+
 
 admin.site.register(Service)
+admin.site.register(ProviderProfile)
 admin.site.register(ServiceProvider)

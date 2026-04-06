@@ -1,13 +1,17 @@
 from django.urls import path
-# from .views import ServiceListView
 
-# urlpatterns = [
-#     path('', ServiceListView.as_view()),
-# ]
-
-from .views import ServiceListView, ServiceProviderView
+from .views import (
+    ProviderDashboardView,
+    ProviderProfileView,
+    ServiceListView,
+    ServiceProviderDetailView,
+    ServiceProviderView,
+)
 
 urlpatterns = [
-    path('services/', ServiceListView.as_view()),
-    path('providers/', ServiceProviderView.as_view()),
+    path("services/", ServiceListView.as_view()),
+    path("providers/", ServiceProviderView.as_view()),
+    path("providers/<int:provider_id>/", ServiceProviderDetailView.as_view()),
+    path("providers/dashboard/", ProviderDashboardView.as_view()),
+    path("providers/profile/", ProviderProfileView.as_view()),
 ]
